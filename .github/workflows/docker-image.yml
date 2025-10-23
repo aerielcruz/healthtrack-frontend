@@ -2,7 +2,7 @@ name: Docker CI
 
 on:
   push:
-    branches: [main]
+    branches: ["*"]
   pull_request:
     branches: [main]
 
@@ -24,7 +24,10 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-optional
+
+      - name: Fix Rollup native module
+        run: npm install @rollup/rollup-linux-x64-gnu --no-save || true
 
       # Build the app
       - name: Build
