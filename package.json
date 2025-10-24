@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "postinstall": "npm install @rollup/rollup-linux-x64-gnu --no-save || true"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
