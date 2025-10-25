@@ -12,7 +12,7 @@ import testimonial3 from "@assets/stock_images/professional_headsho_84e78b99.jpg
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useLocation } from "wouter";
 
-export default function Home() {
+export function Home() {
   const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

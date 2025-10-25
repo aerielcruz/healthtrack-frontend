@@ -206,6 +206,7 @@ function ActivityCard({ activity, onEdit, onDelete }: any) {
           </button>
           <button
             onClick={() => onDelete(activity.id)}
+            aria-label="Delete activity"
             className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
           >
             <Trash2 size={18} />
