@@ -10,8 +10,10 @@ import testimonial1 from "@assets/stock_images/professional_headsho_fc9e0be2.jpg
 import testimonial2 from "@assets/stock_images/professional_headsho_89e36612.jpg";
 import testimonial3 from "@assets/stock_images/professional_headsho_84e78b99.jpg";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useLocation } from "wouter";
 
-export default function Home() {
+export function Home() {
+  const [location, navigate] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -22,34 +24,42 @@ export default function Home() {
     }
   };
 
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
+  const handleSignup = () => {
+    navigate('/signup')
+  }
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 border-b backdrop-blur-lg bg-background/80">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer">
               <Activity className="h-8 w-8 text-primary" data-testid="icon-logo" />
               <span className="text-xl font-bold" data-testid="text-brand">HealthTrack</span>
             </div>
-            
+
             <div className="hidden md:flex items-center gap-8">
-              <button 
-                onClick={() => scrollToSection('features')} 
+              <button
+                onClick={() => scrollToSection('features')}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="link-features"
               >
                 Features
               </button>
-              <button 
-                onClick={() => scrollToSection('about')} 
+              <button
+                onClick={() => scrollToSection('about')}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="link-about"
               >
                 About
               </button>
-              <button 
-                onClick={() => scrollToSection('testimonials')} 
+              <button
+                onClick={() => scrollToSection('testimonials')}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="link-testimonials"
               >
@@ -58,16 +68,16 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-4">
-              <ThemeToggle />
-              <Button variant="outline" size="sm" className="hidden sm:inline-flex" data-testid="button-login">
+              {/* <ThemeToggle /> */}
+              <Button variant="outline" size="sm" className="hidden sm:inline-flex" data-testid="button-login" onClick={handleLogin}>
                 Log In
               </Button>
-              <Button size="sm" className="hidden sm:inline-flex" data-testid="button-signup">
-                Sign Up Free
+              <Button size="sm" className="hidden sm:inline-flex" data-testid="button-signup" onClick={handleSignup}>
+                Sign Up
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="md:hidden"
                 onClick={() => setMobileMenuOpen(true)}
                 data-testid="button-mobile-menu"
@@ -113,11 +123,17 @@ export default function Home() {
               Testimonials
             </button>
             <div className="pt-4 space-y-2">
-              <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)} data-testid="button-mobile-login">
+              <Button variant="outline" className="w-full" onClick={() => {
+                setMobileMenuOpen(false)
+                handleLogin()
+              }} data-testid="button-mobile-login">
                 Log In
               </Button>
-              <Button className="w-full" onClick={() => setMobileMenuOpen(false)} data-testid="button-mobile-signup">
-                Sign Up Free
+              <Button className="w-full" onClick={() => {
+                setMobileMenuOpen(false)
+                handleSignup()
+              }} data-testid="button-mobile-signup" >
+                Sign Up
               </Button>
             </div>
           </div>
@@ -141,9 +157,9 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="text-base px-8" data-testid="button-start-free-trial">
+                <Button size="lg" className="text-base px-8" data-testid="button-start-free-trial" onClick={handleSignup}>
                   <Zap className="mr-2 h-5 w-5" />
-                  Start Free Trial
+                  Get Started Free
                 </Button>
                 <Button size="lg" variant="outline" className="text-base px-8" data-testid="button-watch-demo">
                   Watch Demo
@@ -169,9 +185,9 @@ export default function Home() {
             {/* Right Column - App Preview (40%) */}
             <div className="lg:col-span-2 relative hidden lg:block" data-testid="preview-app">
               <div className="relative">
-                <img 
-                  src={heroImage} 
-                  alt="Person tracking fitness on smartphone" 
+                <img
+                  src={heroImage}
+                  alt="Person tracking fitness on smartphone"
                   className="w-full rounded-2xl shadow-2xl"
                   data-testid="img-hero"
                 />
@@ -562,7 +578,7 @@ export default function Home() {
                     <div className="flex items-end justify-between h-24 gap-2" data-testid="chart-weekly-activity">
                       {[65, 80, 45, 90, 70, 85, 95].map((height, i) => (
                         <div key={i} className="flex-1 flex flex-col justify-end">
-                          <div 
+                          <div
                             className="bg-gradient-to-t from-primary to-chart-2 rounded-t-sm"
                             style={{ height: `${height}%` }}
                             data-testid={`bar-day-${i}`}
@@ -781,7 +797,7 @@ export default function Home() {
             <p className="text-lg text-primary-foreground/90">
               Join over 500,000 users who have transformed their health with HealthTrack
             </p>
-            
+
             <div className="space-y-4">
               <ul className="text-left max-w-md mx-auto space-y-2">
                 <li className="flex items-center gap-3">
@@ -799,7 +815,13 @@ export default function Home() {
               </ul>
             </div>
 
-            <Button size="lg" variant="outline" className="text-base px-8 backdrop-blur-sm bg-background/10 text-primary-foreground border-primary-foreground/20 hover:bg-background/20" data-testid="button-cta-start">
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-base px-8 backdrop-blur-sm bg-background/10 text-primary-foreground border-primary-foreground/20 hover:bg-background/20"
+              data-testid="button-cta-start"
+              onClick={handleSignup}
+            >
               Get Started Free
             </Button>
           </div>
@@ -860,8 +882,8 @@ export default function Home() {
             <div className="space-y-4">
               <h4 className="font-semibold">Download App</h4>
               <div className="space-y-3">
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="flex items-center gap-3 p-3 rounded-lg border hover-elevate transition-all"
                   data-testid="link-download-ios"
                 >
@@ -871,8 +893,8 @@ export default function Home() {
                     <div className="text-sm font-semibold">App Store</div>
                   </div>
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="flex items-center gap-3 p-3 rounded-lg border hover-elevate transition-all"
                   data-testid="link-download-android"
                 >
