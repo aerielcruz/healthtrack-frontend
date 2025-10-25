@@ -20,7 +20,8 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem("theme");
-    return (stored as Theme) || defaultTheme;
+    // return (stored as Theme) || defaultTheme;
+    return defaultTheme
   });
 
   useEffect(() => {
